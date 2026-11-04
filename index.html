@@ -1,2 +1,284 @@
-<h1 style = "color: red">hello</h1>
-<button>Click me !!!!!</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weixiang | Paralegal Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #14213d;
+    --navy-light: #1f3159;
+    --gold: #b8914a;
+    --cream: #faf8f4;
+    --text: #2b2f38;
+    --muted: #6b7280;
+    --white: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    line-height: 1.7;
+  }
+  h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--navy); line-height: 1.2; }
+  a { text-decoration: none; color: inherit; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+  /* Navigation */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e8e3d9;
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; height: 68px; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--navy); }
+  .logo span { color: var(--gold); }
+  nav ul { display: flex; gap: 28px; list-style: none; }
+  nav ul a { font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: color .2s; }
+  nav ul a:hover { color: var(--gold); }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: var(--white);
+    padding: 120px 0 130px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: ""; position: absolute; right: -120px; top: -120px;
+    width: 420px; height: 420px; border-radius: 50%;
+    border: 1px solid rgba(184, 145, 74, 0.35);
+  }
+  .hero .tag {
+    display: inline-block; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px; font-weight: 600;
+  }
+  .hero h1 { color: var(--white); font-size: clamp(2.4rem, 6vw, 4rem); margin-bottom: 20px; }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero p { max-width: 560px; color: #cdd3e0; font-size: 1.1rem; margin-bottom: 36px; }
+  .btn {
+    display: inline-block; padding: 14px 30px; border-radius: 4px;
+    font-weight: 600; font-size: 0.95rem; transition: all .25s;
+  }
+  .btn-gold { background: var(--gold); color: var(--white); }
+  .btn-gold:hover { background: #a07c3a; transform: translateY(-2px); }
+  .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: var(--white); margin-left: 12px; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Sections */
+  section { padding: 90px 0; }
+  .section-label {
+    font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 10px;
+  }
+  .section-title { font-size: 2.2rem; margin-bottom: 40px; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 56px; align-items: start; }
+  .about-grid p { margin-bottom: 18px; color: #444a57; }
+  .stats { display: grid; gap: 16px; }
+  .stat {
+    background: var(--white); padding: 24px; border-radius: 8px;
+    border-left: 3px solid var(--gold); box-shadow: 0 2px 12px rgba(20,33,61,0.06);
+  }
+  .stat strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--navy); }
+  .stat span { color: var(--muted); font-size: 0.9rem; }
+
+  /* Services */
+  .bg-white { background: var(--white); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .card {
+    background: var(--cream); padding: 32px 28px; border-radius: 8px;
+    border: 1px solid #eee8dc; transition: all .3s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(20,33,61,0.1); border-color: var(--gold); }
+  .card .icon { font-size: 1.8rem; margin-bottom: 14px; }
+  .card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+  .card p { color: var(--muted); font-size: 0.95rem; }
+
+  /* Experience timeline */
+  .timeline { border-left: 2px solid #e1d9c8; padding-left: 32px; }
+  .job { position: relative; margin-bottom: 40px; }
+  .job::before {
+    content: ""; position: absolute; left: -41px; top: 8px;
+    width: 14px; height: 14px; background: var(--gold); border-radius: 50%;
+    border: 3px solid var(--cream);
+  }
+  .job .date { font-size: 0.82rem; color: var(--gold); font-weight: 600; letter-spacing: 1px; }
+  .job h3 { font-size: 1.3rem; margin: 4px 0; }
+  .job .firm { color: var(--muted); margin-bottom: 10px; font-weight: 500; }
+  .job ul { padding-left: 18px; color: #444a57; }
+  .job li { margin-bottom: 6px; }
+
+  /* Skills */
+  .skills { display: flex; flex-wrap: wrap; gap: 12px; }
+  .skill {
+    padding: 10px 20px; background: var(--white); border: 1px solid #e1d9c8;
+    border-radius: 50px; font-size: 0.9rem; font-weight: 500; color: var(--navy);
+    transition: all .2s;
+  }
+  .skill:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+  /* Contact */
+  .contact { background: var(--navy); color: var(--white); text-align: center; }
+  .contact h2 { color: var(--white); font-size: 2.4rem; margin-bottom: 16px; }
+  .contact p { color: #cdd3e0; max-width: 480px; margin: 0 auto 32px; }
+  .contact-links { margin-top: 28px; display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; font-size: 0.95rem; color: #cdd3e0; }
+  .contact-links a:hover { color: var(--gold); }
+
+  footer { text-align: center; padding: 28px; font-size: 0.85rem; color: var(--muted); background: var(--cream); }
+
+  @media (max-width: 760px) {
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    nav ul { gap: 16px; }
+    .btn-outline { margin-left: 0; margin-top: 12px; }
+    .hero { padding: 90px 0 100px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#top" class="logo">Wei<span>xiang</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container">
+    <span class="tag">Paralegal</span>
+    <h1>Precise. Organised.<br><em>Dependable.</em></h1>
+    <p>Hi, I'm Weixiang. I support legal teams with careful research, clear documentation and well-managed cases, so attorneys can focus on strategy.</p>
+    <a href="#contact" class="btn btn-gold">Get in touch</a>
+    <a href="#experience" class="btn btn-outline">View experience</a>
+  </div>
+</header>
+
+<section id="about">
+  <div class="container">
+    <div class="section-label">About me</div>
+    <h2 class="section-title">Attention to detail, in every file.</h2>
+    <div class="about-grid">
+      <div>
+        <p>I'm a paralegal who takes pride in accuracy, discretion and meeting deadlines. I enjoy turning complex case material into organised, easy-to-use files that help lawyers work faster and with confidence.</p>
+        <p>I'm comfortable managing multiple matters at once, communicating with clients and colleagues, and adopting new tools that make legal work more efficient.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>[X]+</strong><span>Years of experience</span></div>
+        <div class="stat"><strong>[X]+</strong><span>Cases supported</span></div>
+        <div class="stat"><strong>100%</strong><span>Commitment to confidentiality</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="bg-white">
+  <div class="container">
+    <div class="section-label">What I do</div>
+    <h2 class="section-title">Areas of support</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">📄</div>
+        <h3>Document Drafting</h3>
+        <p>Preparing and proofreading pleadings, contracts, letters and other legal documents.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔍</div>
+        <h3>Legal Research</h3>
+        <p>Researching statutes, case law and regulations, and summarising findings clearly.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🗂️</div>
+        <h3>Case Management</h3>
+        <p>Organising files, tracking deadlines and keeping every matter on schedule.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h3>Client Liaison</h3>
+        <p>Acting as a professional point of contact between clients, counsel and courts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Career</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+      <div class="job">
+        <span class="date">[YEAR] – Present</span>
+        <h3>Paralegal</h3>
+        <div class="firm">[Law Firm Name]</div>
+        <ul>
+          <li>Prepared and reviewed legal documents for attorney sign-off.</li>
+          <li>Managed case files, filings and court deadlines.</li>
+          <li>Conducted legal research and drafted summaries.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <span class="date">[YEAR] – [YEAR]</span>
+        <h3>[Previous Role]</h3>
+        <div class="firm">[Company / Firm Name]</div>
+        <ul>
+          <li>[Key responsibility or achievement]</li>
+          <li>[Key responsibility or achievement]</li>
+        </ul>
+      </div>
+      <div class="job">
+        <span class="date">[YEAR]</span>
+        <h3>[Degree / Certification]</h3>
+        <div class="firm">[University / Institution]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white">
+  <div class="container">
+    <div class="section-label">Toolkit</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills">
+      <span class="skill">Legal Research</span>
+      <span class="skill">Contract Drafting</span>
+      <span class="skill">Case Management</span>
+      <span class="skill">Document Review</span>
+      <span class="skill">Court Filings</span>
+      <span class="skill">Client Communication</span>
+      <span class="skill">Confidentiality</span>
+      <span class="skill">Microsoft Word &amp; Excel</span>
+      <span class="skill">Time Management</span>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <h2>Let's work together</h2>
+    <p>Looking for a reliable paralegal to support your team? I'd love to hear from you.</p>
+    <a href="mailto:your.email@example.com" class="btn btn-gold">Email me</a>
+    <div class="contact-links">
+      <a href="mailto:your.email@example.com">your.email@example.com</a>
+      <a href="#">LinkedIn</a>
+      <a href="tel:+000000000">+00 0000 0000</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Weixiang. All rights reserved.</footer>
+
+</body>
+</html>
