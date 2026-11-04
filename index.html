@@ -43,6 +43,26 @@
   nav ul a { font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: color .2s; }
   nav ul a:hover { color: var(--gold); }
 
+  /* More dropdown */
+  .dropdown { position: relative; }
+  .dropdown-toggle {
+    background: none; border: none; cursor: pointer; font: inherit;
+    font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: color .2s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .dropdown-toggle:hover, .dropdown.open .dropdown-toggle { color: var(--gold); }
+  .dropdown-toggle .caret { font-size: 0.65rem; transition: transform .2s; }
+  .dropdown.open .caret { transform: rotate(180deg); }
+  .dropdown-menu {
+    display: none; position: absolute; right: 0; top: calc(100% + 14px);
+    min-width: 170px; background: var(--white); border: 1px solid #e8e3d9;
+    border-radius: 8px; box-shadow: 0 10px 28px rgba(20,33,61,0.12);
+    padding: 8px 0; list-style: none; flex-direction: column; gap: 0;
+  }
+  .dropdown.open .dropdown-menu { display: flex; }
+  .dropdown-menu a { display: block; padding: 10px 20px; font-size: 0.9rem; }
+  .dropdown-menu a:hover { background: var(--cream); }
+
   /* Hero */
   .hero {
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
@@ -153,6 +173,13 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li class="dropdown">
+        <button class="dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false">More <span class="caret">▼</span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="mailto:sweixiang24@gmail.com">Email me</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav>
@@ -177,7 +204,7 @@
         <p>I'm comfortable managing multiple matters at once, communicating with clients and colleagues, and adopting new tools that make legal work more efficient.</p>
       </div>
       <div class="stats">
-        <div class="stat"><strong>[X]+</strong><span>Years of experience</span></div>
+        <div class="stat"><strong>4+</strong><span>Years of experience</span></div>
         <div class="stat"><strong>[X]+</strong><span>Cases supported</span></div>
         <div class="stat"><strong>100%</strong><span>Commitment to confidentiality</span></div>
       </div>
@@ -220,7 +247,7 @@
     <h2 class="section-title">Experience</h2>
     <div class="timeline">
       <div class="job">
-        <span class="date">[YEAR] – Present</span>
+        <span class="date">2022 – Present</span>
         <h3>Paralegal</h3>
         <div class="firm">[Law Firm Name]</div>
         <ul>
@@ -247,7 +274,7 @@
   </div>
 </section>
 
-<section class="bg-white">
+<section class="bg-white" id="skills">
   <div class="container">
     <div class="section-label">Toolkit</div>
     <h2 class="section-title">Skills</h2>
@@ -269,9 +296,9 @@
   <div class="container">
     <h2>Let's work together</h2>
     <p>Looking for a reliable paralegal to support your team? I'd love to hear from you.</p>
-    <a href="mailto:your.email@example.com" class="btn btn-gold">Email me</a>
+    <a href="mailto:sweixiang24@gmail.com" class="btn btn-gold">Email me</a>
     <div class="contact-links">
-      <a href="mailto:your.email@example.com">your.email@example.com</a>
+      <a href="mailto:sweixiang24@gmail.com">sweixiang24@gmail.com</a>
       <a href="#">LinkedIn</a>
       <a href="tel:+000000000">+00 0000 0000</a>
     </div>
@@ -280,5 +307,16 @@
 
 <footer>© 2026 Weixiang. All rights reserved.</footer>
 
+<script>
+  (function () {
+    var dd = document.querySelector('.dropdown');
+    var btn = dd.querySelector('.dropdown-toggle');
+    function setOpen(o) { dd.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!dd.classList.contains('open')); });
+    document.addEventListener('click', function () { setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+    dd.querySelectorAll('.dropdown-menu a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+  })();
+</script>
 </body>
 </html>
